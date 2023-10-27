@@ -7,11 +7,11 @@ import (
 )
 
 type MysqlConfig struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Host     string `json:"host"`
-	Name     string `json:"name"`
-	Port     string `json:"port"`
+	Username string `json:"m_username"`
+	Password string `json:"m_password"`
+	Host     string `json:"m_host"`
+	Name     string `json:"m_name"`
+	Port     string `json:"m_port"`
 }
 
 type PostgresConfig struct {
