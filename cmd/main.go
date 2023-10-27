@@ -20,7 +20,7 @@ func main() {
 	if flags.DbType == "postgres" {
 		config, err := config.ReadPostgresConfig(flags.DbConfig)
 		if err != nil {
-			fmt.Println(err)
+			utils.Colorize(utils.ColorRed, err.Error())
 			return
 		}
 		// dbConfig = config
@@ -34,7 +34,7 @@ func main() {
 	} else if flags.DbType == "mysql"{
 		config, err := config.ReadMysqlConfig(flags.DbConfig)
 		if err != nil {
-			fmt.Println(err)
+			utils.Colorize(utils.ColorRed, err.Error())
 			return
 		}
 		// dbConfig = config
