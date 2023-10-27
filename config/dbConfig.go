@@ -12,6 +12,7 @@ type MysqlConfig struct {
 	Host     string `json:"host"`
 	Name     string `json:"name"`
 	Port     string `json:"port"`
+	Table    string `json:"table_name"`
 }
 
 type PostgresConfig struct {
@@ -20,6 +21,7 @@ type PostgresConfig struct {
 	Host     string `json:"host"`
 	Name     string `json:"name"`
 	SSL      string `json:"ssl"`
+	Table    string `json:"table_name"`
 }
 
 func ReadMysqlConfig(path string) (*MysqlConfig, error) {
@@ -53,6 +55,9 @@ func ReadMysqlConfig(path string) (*MysqlConfig, error) {
 	if cfg.Username == "" {
 		return nil, fmt.Errorf("no username provided(config file)")
 	}
+	if cfg.Table == "" {
+		return nil, fmt.Errorf("no table provided(config file)")
+	}
 
 	return &cfg, nil
 }
@@ -73,7 +78,6 @@ func ReadPostgresConfig(path string) (*PostgresConfig, error) {
 		return nil, err
 	}
 
-
 	if cfg.Host == "" {
 		return nil, fmt.Errorf("no host provided(config file)")
 	}
@@ -88,6 +92,9 @@ func ReadPostgresConfig(path string) (*PostgresConfig, error) {
 	}
 	if cfg.Username == "" {
 		return nil, fmt.Errorf("no username provided(config file)")
+	}
+	if cfg.Table == "" {
+		return nil, fmt.Errorf("no table provided(config file)")
 	}
 
 	return &cfg, nil
