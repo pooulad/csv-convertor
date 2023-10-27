@@ -1,7 +1,8 @@
 {
   "username": "postgres",
-  "password": "postgres",
+  "password": "password",
   "host": "127.0.0.1",
   "name": "exel2sqldb",
-  "ssl": "disable"
+  "ssl": "disable",
+  "table_name" : "users"
 }
