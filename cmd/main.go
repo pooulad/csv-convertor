@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/pooulad/csv-convertor/config"
@@ -16,38 +15,37 @@ func main() {
 		utils.Colorize(utils.ColorRed, err.Error())
 		return
 	}
-	// var dbConfig interface{}
 	if flags.DbType == "postgres" {
 		config, err := config.ReadPostgresConfig(flags.DbConfig)
+
 		if err != nil {
 			utils.Colorize(utils.ColorRed, err.Error())
 			return
 		}
-		// dbConfig = config
 
-		db, err := database.ConnectPostgres(config, flags)
+		db, err := database.ConnectPostgres(config)
 		if err != nil {
 			log.Fatal(err)
 		}
+
 		defer db.Close()
 
-	} else if flags.DbType == "mysql"{
+	} else if flags.DbType == "mysql" {
 		config, err := config.ReadMysqlConfig(flags.DbConfig)
+
 		if err != nil {
 			utils.Colorize(utils.ColorRed, err.Error())
 			return
 		}
-		// dbConfig = config
-		fmt.Println(config)
-		db, err := database.ConnectMysql(config, flags)
+
+		db, err := database.ConnectMysql(config)
 		if err != nil {
 			log.Fatal(err)
 		}
+
 		defer db.Close()
-	}else{
+	} else {
 		utils.Colorize(utils.ColorRed, "database name should be `postgres` OR `mysql`")
 		return
 	}
-
-	// fmt.Printf("this is config : %s\n", dbConfig)
 }
