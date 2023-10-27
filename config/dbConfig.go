@@ -7,11 +7,11 @@ import (
 )
 
 type MysqlConfig struct {
-	Username string `json:"m_username"`
-	Password string `json:"m_password"`
-	Host     string `json:"m_host"`
-	Name     string `json:"m_name"`
-	Port     string `json:"m_port"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Host     string `json:"host"`
+	Name     string `json:"name"`
+	Port     string `json:"port"`
 }
 
 type PostgresConfig struct {
@@ -38,6 +38,22 @@ func ReadMysqlConfig(path string) (*MysqlConfig, error) {
 		return nil, err
 	}
 
+	if cfg.Host == "" {
+		return nil, fmt.Errorf("no host provided(config file)")
+	}
+	if cfg.Port == "" {
+		return nil, fmt.Errorf("no port provided(config file)")
+	}
+	if cfg.Name == "" {
+		return nil, fmt.Errorf("no name provided(config file)")
+	}
+	if cfg.Password == "" {
+		return nil, fmt.Errorf("no password provided(config file)")
+	}
+	if cfg.Username == "" {
+		return nil, fmt.Errorf("no username provided(config file)")
+	}
+
 	return &cfg, nil
 }
 
@@ -55,6 +71,23 @@ func ReadPostgresConfig(path string) (*PostgresConfig, error) {
 	err = json.Unmarshal(file, &cfg)
 	if err != nil {
 		return nil, err
+	}
+
+
+	if cfg.Host == "" {
+		return nil, fmt.Errorf("no host provided(config file)")
+	}
+	if cfg.SSL == "" {
+		return nil, fmt.Errorf("no ssl provided(config file)")
+	}
+	if cfg.Name == "" {
+		return nil, fmt.Errorf("no name provided(config file)")
+	}
+	if cfg.Password == "" {
+		return nil, fmt.Errorf("no password provided(config file)")
+	}
+	if cfg.Username == "" {
+		return nil, fmt.Errorf("no username provided(config file)")
 	}
 
 	return &cfg, nil
