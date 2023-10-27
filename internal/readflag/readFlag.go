@@ -3,6 +3,7 @@ package readflag
 import (
 	"errors"
 	"flag"
+	"fmt"
 )
 
 type FlagReturns struct {
@@ -14,11 +15,12 @@ type FlagReturns struct {
 func ReadFlag() (*FlagReturns, error) {
 	fr := FlagReturns{}
 	flag.StringVar(&fr.FileName, "file", "./username.csv", "CSV file path")
-	flag.StringVar(&fr.DbConfig, "config", "./config.json", "Config file path")
-	flag.StringVar(&fr.DbType, "type", "postgres", "Database type")
+	flag.StringVar(&fr.DbConfig, "config", "", "Config file path")
+	flag.StringVar(&fr.DbType, "type", "", "Database type")
 
 	flag.Parse()
 
+	fmt.Println(fr.DbConfig)
 	if fr.FileName == "" {
 		return nil, errors.New("please enter a valid file address")
 	}
@@ -26,7 +28,7 @@ func ReadFlag() (*FlagReturns, error) {
 		return nil, errors.New("please enter a valid config address")
 	}
 	if fr.DbType == "" {
-		return nil, errors.New("please enter a valid database name")
+		return nil, errors.New("please enter a valid database name(postgres OR mysql)")
 	}
 
 	return &fr, nil
