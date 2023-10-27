@@ -13,7 +13,7 @@ type FlagReturns struct {
 
 func ReadFlag() (*FlagReturns, error) {
 	fr := FlagReturns{}
-	flag.StringVar(&fr.FileName, "file", "./username.csv", "CSV file path")
+	flag.StringVar(&fr.FileName, "file", "", "CSV file path")
 	flag.StringVar(&fr.DbConfig, "config", "", "Config file path")
 	flag.StringVar(&fr.DbType, "type", "", "Database type")
 
