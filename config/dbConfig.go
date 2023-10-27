@@ -1,5 +1,7 @@
 package config
 
+import (
+	"encoding/json"
 	"fmt"
 	"os"
 )
@@ -38,3 +40,21 @@ func ReadMysqlConfig(path string) (*MysqlConfig, error) {
 	return &cfg, nil
 }
 
+func ReadPostgresConfig(path string) (*PostgresConfig, error) {
+	if path == "" {
+		return nil, fmt.Errorf("no path provided")
+	}
+
+	file, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	var cfg PostgresConfig
+	err = json.Unmarshal(file, &cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	return &cfg, nil
+}
