@@ -49,6 +49,5 @@ func main() {
 		return
 	}
 
-
-	fmt.Printf("this is config : %s\n",dbConfig)
+	// fmt.Printf("this is config : %s\n", dbConfig)
 }
