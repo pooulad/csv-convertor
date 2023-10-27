@@ -5,6 +5,7 @@ import (
 
 	"github.com/pooulad/csv-convertor/config"
 	"github.com/pooulad/csv-convertor/database"
+	"github.com/pooulad/csv-convertor/internal/readcsv"
 	"github.com/pooulad/csv-convertor/internal/readflag"
 	"github.com/pooulad/csv-convertor/utils"
 )
@@ -26,6 +27,13 @@ func main() {
 		db, err := database.ConnectPostgres(config)
 		if err != nil {
 			log.Fatal(err)
+		}
+
+
+		err = readcsv.ReadExcelAndInsertData(db, flags.FileName,"users")
+		if err != nil {
+			utils.Colorize(utils.ColorRed, err.Error())
+			return
 		}
 
 		defer db.Close()
