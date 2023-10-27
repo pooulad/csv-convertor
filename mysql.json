@@ -3,5 +3,6 @@
   "password": "root",
   "host": "127.0.0.1",
   "name": "csvtest",
-  "port": "disable"
+  "port": "disable",
+  "table_name" : "users"
 }
