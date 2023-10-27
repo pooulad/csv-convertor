@@ -15,7 +15,8 @@ func ConnectMysql(cfg *config.MysqlConfig, f *readflag.FlagReturns) (*sql.DB, er
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("mysql connected")
+
+	fmt.Println(dsn)
 	return db, nil
 }
 
