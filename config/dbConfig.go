@@ -11,6 +11,7 @@ type MysqlConfig struct {
 	Password string `json:"password"`
 	Host     string `json:"host"`
 	Name     string `json:"name"`
+	Port     string `json:"port"`
 }
 
 type PostgresConfig struct {
