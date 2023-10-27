@@ -19,3 +19,12 @@ func ConnectMysql(cfg *config.MysqlConfig, f *readflag.FlagReturns) (*sql.DB, er
 	return db, nil
 }
 
+func ConnectPostgres(cfg *config.PostgresConfig, f *readflag.FlagReturns) (*sql.DB, error) {
+	dsn := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=%s", cfg.Username, cfg.Password, cfg.Host, cfg.Name, cfg.SSL)
+	db, err := sql.Open("postgres", dsn)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println("postgres connected")
+	return db, nil
+}
