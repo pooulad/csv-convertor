@@ -35,7 +35,6 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 		if i == 0 {
 			continue
 		} else {
-
 			var quotedValues []string
 			for _, value := range row {
 				quotedValues = append(quotedValues, fmt.Sprintf("'%s'", value))
@@ -46,6 +45,7 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 			querySuccessfulMessage := fmt.Sprintf("[%s] inserted into %s", dataString, tableName)
 
 			utils.Colorize(utils.ColorGreen, querySuccessfulMessage)
+
 			_, err = tx.Exec(query)
 			if err != nil {
 				tx.Rollback()
