@@ -6,6 +6,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"strings"
 )
 
 type ListRecord struct {
@@ -18,7 +19,7 @@ type ListRecord struct {
 type Test struct {
 }
 
-func ReadExcelAndInsertData(db *sql.DB, fileAddress string, table_name string) error {
+func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) error {
 	f, err := os.Open(fileAddress)
 	if err != nil {
 		return err
@@ -31,50 +32,29 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, table_name string) e
 		return err
 	}
 
-	// csvData := createList(data)
-	for v, r := range data {
-		fmt.Println(v)
-		for j, g := range r {
-			fmt.Println(j)
-			fmt.Println(g)
-		}
-		fmt.Println(r)
-	}
-
 	tx, err := db.BeginTx(context.Background(), nil)
 	if err != nil {
 		return err
 	}
 
-
-    // a := make(map[string]interface{})
-	test := Test{}
-	n := data[0]
-	fmt.Println(data[0])
-	for _, row := range n {
-		// test.(string(row)) = row
-		test.(row) = row 
-	}
-	fmt.Println(n[0])
-
-
+	columnRow := data[0]
+	columnString := strings.Join(columnRow, ", ")
 	for i, row := range data {
-		for j, g := range row {
+		if i == 0 {
+			continue
+		} else {
 
-			// cellValue1 := row.Username
-			// cellValue2 := row.Identifier
-			// cellValue3 := row.Firstname
-			// cellValue4 := row.Lastname
+			var quotedValues []string
+			for _, value := range row {
+				quotedValues = append(quotedValues, fmt.Sprintf("'%s'", value))
+			}
+			dataString := strings.Join(quotedValues, ", ")
 
-			s := fmt.Sprintf("INSERT INTO users (Username,Identifier,Firstname,Lastname) VALUES ($1,$2,$3,$4)")
+			query := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnString, dataString)
+			
 
-			_, err = tx.Exec(
-				"INSERT INTO users (Username,Identifier,Firstname,Lastname) VALUES ($1,$2,$3,$4)",
-				cellValue1,
-				cellValue2,
-				cellValue3,
-				cellValue4,
-			)
+			fmt.Println(query)
+			_, err = tx.Exec(query)
 			if err != nil {
 				tx.Rollback()
 				return err
@@ -87,11 +67,5 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, table_name string) e
 		return err
 	}
 
-	// fmt.Println(csvData)
 	return nil
-}
-
-func createList(data interface{}) [][]string {
-	fmt.Println(data)
-	return [][]string{{"ff", "f"}, {"dd", "d"}}
 }
