@@ -9,12 +9,6 @@ import (
 	"strings"
 )
 
-type ListRecord struct {
-	Username   string
-	Identifier string
-	Firstname  string
-	Lastname   string
-}
 
 type Test struct {
 }
