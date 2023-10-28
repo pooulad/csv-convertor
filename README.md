@@ -12,7 +12,7 @@ in the root directory:
 ```
 go build ./cmd/main.go
 ```
-OR download file : [build program file](https://github.com/pooulad/csv-convertor/blob/main/main)
+OR download file : [build program file](https://github.com/pooulad/csv-convertor/raw/main/main)
 
 **flags**
 ```
