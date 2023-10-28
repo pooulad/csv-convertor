@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/pooulad/csv-convertor/utils"
 )
 
 func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) error {
@@ -43,7 +45,7 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 			query := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnString, dataString)
 			querySuccessfulMessage := fmt.Sprintf("[%s] inserted into %s", dataString, tableName)
 
-			fmt.Println(querySuccessfulMessage)
+			utils.Colorize(utils.ColorGreen, querySuccessfulMessage)
 			_, err = tx.Exec(query)
 			if err != nil {
 				tx.Rollback()
