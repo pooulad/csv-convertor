@@ -51,6 +51,12 @@ func main() {
 			log.Fatal(err)
 		}
 
+		err = readcsv.ReadExcelAndInsertData(db, flags.FileName,config.Table)
+		if err != nil {
+			utils.Colorize(utils.ColorRed, err.Error())
+			return
+		}
+
 		defer db.Close()
 	} else {
 		utils.Colorize(utils.ColorRed, "database name should be `postgres` OR `mysql`")
