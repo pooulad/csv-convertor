@@ -9,7 +9,6 @@ import (
 	"strings"
 )
 
-
 func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) error {
 	f, err := os.Open(fileAddress)
 	if err != nil {
@@ -42,9 +41,9 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 			dataString := strings.Join(quotedValues, ", ")
 
 			query := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnString, dataString)
-			
+			querySuccessfulMessage := fmt.Sprintf("[%s] inserted into %s", dataString, tableName)
 
-			fmt.Println(query)
+			fmt.Println(querySuccessfulMessage)
 			_, err = tx.Exec(query)
 			if err != nil {
 				tx.Rollback()
