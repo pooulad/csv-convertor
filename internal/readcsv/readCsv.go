@@ -73,26 +73,29 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, table_name string) e
 
 func createList(data [][]string) []interface{} {
 	var finalList []interface{}
-	for i, line := range data {
+	for _, line := range data {
 		var rec interface{}
-		if i == 0 {
-			continue
-		} else {
-			dataType := reflect.TypeOf(line)
+		// if i == 0 {
+		// 	continue
+		// } else {
+			// dataType := reflect.TypeOf(line)
 			dataValue := reflect.ValueOf(line)
-
+			x := make(map[string][]string)
 			if dataValue.Kind() == reflect.Slice {
-				for i := 0; i < dataValue.Len(); i++ {
-					field := dataType.Field(i)
-					fieldValue := dataValue.Field(i)
+				// fmt.Println(dataValue.Kind())
+				// fmt.Println(dataValue.Type())
+				// fmt.Println(dataType)
+				// for i := 0; i < dataValue.Len(); i++ {
+				// 	field := dataType.Field(i)
+				// 	fieldValue := dataValue.Field(i)
 	
 
-					fmt.Println(field)
-					fmt.Println(fieldValue)
-				}
+				// 	fmt.Println(field)
+				// 	fmt.Println(fieldValue)
+				// }
 			}
 			fmt.Println(dataValue)
-		}
+		// }
 		finalList = append(finalList, rec)
 	}
 	return finalList
