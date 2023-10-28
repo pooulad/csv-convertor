@@ -4,5 +4,5 @@
   "host": "127.0.0.1",
   "name": "csvtest",
   "port": "disable",
-  "table_name" : "users"
+  "table_name" : "employee"
 }
