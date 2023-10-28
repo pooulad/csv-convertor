@@ -78,20 +78,19 @@ func createList(data [][]string) []interface{} {
 		if i == 0 {
 			continue
 		} else {
-			// dataType := reflect.TypeOf(line)
+			dataType := reflect.TypeOf(line)
 			dataValue := reflect.ValueOf(line)
 
 			if dataValue.Kind() == reflect.Slice {
-				
-			}
-			for i := 0; i < len(dataValue); i++ {
-				field := dataType.Field(i)
-				fieldValue := dataValue.Field(i)
+				for i := 0; i < dataValue.Len(); i++ {
+					field := dataType.Field(i)
+					fieldValue := dataValue.Field(i)
+	
 
-				fmt.Println(field)
-				fmt.Println(fieldValue)
+					fmt.Println(field)
+					fmt.Println(fieldValue)
+				}
 			}
-			fmt.Println(dataType.Kind())
 			fmt.Println(dataValue)
 		}
 		finalList = append(finalList, rec)
