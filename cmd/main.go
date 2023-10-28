@@ -30,7 +30,7 @@ func main() {
 		}
 
 
-		err = readcsv.ReadExcelAndInsertData(db, flags.FileName,"users")
+		err = readcsv.ReadExcelAndInsertData(db, flags.FileName,config.Table)
 		if err != nil {
 			utils.Colorize(utils.ColorRed, err.Error())
 			return
