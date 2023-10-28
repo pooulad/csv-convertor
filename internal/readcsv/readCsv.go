@@ -10,9 +10,6 @@ import (
 )
 
 
-type Test struct {
-}
-
 func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) error {
 	f, err := os.Open(fileAddress)
 	if err != nil {
