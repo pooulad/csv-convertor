@@ -15,7 +15,7 @@ func ConnectMysql(cfg *config.MysqlConfig) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-
+fmt.Println(dsn)
 	err = db.Ping()
 	if err != nil {
 		panic(err)
