@@ -4,10 +4,19 @@
 
 <a href="https://www.coffeebede.com/poulad"><img class="img-fluid" src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" /></a>
 ## Usage
+Before starting remember that your database structure should be same as your csv structure. otherwise it dosn't work.
+![1 AoO5hLnLRZvU2zSqyko-Ow](https://github.com/pooulad/csv-convertor/assets/86445458/ecbc2779-f502-47c2-8037-2430cf5c5a9f)
+
+## How to build
+in the root directory:
+```
+go build ./cmd/main.go
+```
+OR download file : [build program file](https://github.com/pooulad/csv-convertor/blob/main/main)
 
 **flags**
 ```
-🚨databaseType = "mysql" OR "postgres"
+databaseType = "mysql" OR "postgres"
 -type=databaseType or --type=databaseType
 ```
 ```
@@ -25,7 +34,8 @@ mysql sample :
   "password": "postgres",
   "host": "localhost",
   "name": "exel2sqldb",
-  "port": "3306"
+  "port": "3306",
+  "table_name": "name",
 }
 ```
 
@@ -36,7 +46,8 @@ postgres sample :
   "password": "postgres",
   "host": "localhost",
   "name": "exel2sqldb",
-  "ssl": "disable"
+  "ssl": "disable",
+  "table_name": "name",
 }
 ```
 
