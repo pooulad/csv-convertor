@@ -5,6 +5,7 @@
 <a href="https://www.coffeebede.com/poulad"><img class="img-fluid" src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" /></a>
 ## Usage
 Before starting remember that your database structure should be same as your csv structure. otherwise it dosn't work.
+
 ![1 AoO5hLnLRZvU2zSqyko-Ow](https://github.com/pooulad/csv-convertor/assets/86445458/ecbc2779-f502-47c2-8037-2430cf5c5a9f)
 
 ## How to build
@@ -84,13 +85,13 @@ wine start ./buildFileName -type=postgres -file=./assets/username.csv -config=./
 
 **Database:** postgresql,mysql
 
-**Lang:** GO
+**Lang:** GOLANG
 
     github.com/lib/pq
     github.com/go-sql-driver/mysql
 
 
-## Authors
+## Author
 
 - [@pooulad](https://www.github.com/pooulad)
   
