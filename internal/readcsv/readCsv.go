@@ -30,7 +30,10 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 	}
 
 	columnRow := data[0]
+	
 	columnString := strings.Join(columnRow, ", ")
+
+	var querySuccessfulMessage []string
 	for i, row := range data {
 		if i != 0 {
 			var quotedValues []string
@@ -40,10 +43,9 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 			dataString := strings.Join(quotedValues, ", ")
 
 			query := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)", tableName, columnString, dataString)
-			querySuccessfulMessage := fmt.Sprintf("[%s] inserted into %s", dataString, tableName)
-
-			utils.Colorize(utils.ColorGreen, querySuccessfulMessage)
-
+			
+			querySuccessfulMessage = append(querySuccessfulMessage, fmt.Sprintf("[%s] inserted into %s", dataString, tableName))
+			
 			_, err = tx.Exec(query)
 			if err != nil {
 				tx.Rollback()
@@ -51,12 +53,15 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 			}
 		}
 	}
-
+	
 	err = tx.Commit()
 	if err != nil {
 		tx.Rollback()
 		return err
 	}
-
+	for _,v := range querySuccessfulMessage {
+		utils.Colorize(utils.ColorGreen, v)
+	}
+	
 	return nil
 }
