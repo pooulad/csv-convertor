@@ -32,9 +32,7 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 	columnRow := data[0]
 	columnString := strings.Join(columnRow, ", ")
 	for i, row := range data {
-		if i == 0 {
-			continue
-		} else {
+		if i != 0 {
 			var quotedValues []string
 			for _, value := range row {
 				quotedValues = append(quotedValues, fmt.Sprintf("'%s'", value))
