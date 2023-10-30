@@ -54,6 +54,7 @@ func ReadExcelAndInsertData(db *sql.DB, fileAddress string, tableName string) er
 
 	err = tx.Commit()
 	if err != nil {
+		tx.Rollback()
 		return err
 	}
 
